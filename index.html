@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Ilustración & Animación</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --stone: #E7E9E2;
+    --ink: #22241D;
+    --forest: #2F3B2E;
+    --ochre: #B8912B;
+    --paper: #F1F2ED;
+    --line: rgba(34,36,29,0.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--stone);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    font-weight:400;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3, .display{
+    font-family:'Newsreader', serif;
+    font-weight:500;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit;}
+
+  /* ---------- Layout shell ---------- */
+  .wrap{
+    max-width:920px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    padding:64px 0 40px;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--forest);
+    margin-bottom:18px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    display:inline-block;
+    width:22px;
+    height:1px;
+    background:var(--ochre);
+  }
+  header h1{
+    font-size:clamp(38px, 6vw, 60px);
+    line-height:1.05;
+    max-width:12ch;
+  }
+  header h1 em{
+    font-style:italic;
+    color:var(--forest);
+  }
+  .subtitle{
+    margin-top:20px;
+    max-width:46ch;
+    font-size:16.5px;
+    color:rgba(34,36,29,0.72);
+  }
+  nav{
+    margin-top:36px;
+    display:flex;
+    gap:28px;
+    font-size:13.5px;
+    letter-spacing:0.03em;
+  }
+  nav a{
+    text-decoration:none;
+    color:var(--ink);
+    opacity:0.6;
+    transition:opacity 0.2s;
+    padding-bottom:2px;
+    border-bottom:1px solid transparent;
+  }
+  nav a:hover{ opacity:1; border-bottom-color:var(--ochre); }
+
+  /* ---------- Section generic ---------- */
+  section{
+    padding:72px 0;
+    border-bottom:1px solid var(--line);
+  }
+  section:last-of-type{border-bottom:none;}
+  .section-label{
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--forest);
+    margin-bottom:16px;
+  }
+  .section-title{
+    font-size:clamp(26px, 3.4vw, 34px);
+    max-width:20ch;
+    margin-bottom:20px;
+  }
+  .section-body{
+    max-width:58ch;
+    color:rgba(34,36,29,0.78);
+    font-size:15.5px;
+  }
+
+  /* ---------- Featured project (signature: before/after slider) ---------- */
+  .project-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:24px;
+    flex-wrap:wrap;
+    margin-bottom:32px;
+  }
+  .project-meta{
+    display:flex;
+    gap:24px;
+    font-size:13px;
+    color:rgba(34,36,29,0.6);
+  }
+  .project-meta dt{
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    font-size:11px;
+    margin-bottom:4px;
+  }
+  .project-meta dd{
+    font-family:'Newsreader', serif;
+    font-size:15px;
+    color:var(--ink);
+  }
+
+  .compare{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/10;
+    border-radius:2px;
+    overflow:hidden;
+    cursor:ew-resize;
+    background:var(--paper);
+    border:1px solid var(--line);
+  }
+  .compare .layer{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Newsreader', serif;
+    font-style:italic;
+    font-size:15px;
+    color:rgba(34,36,29,0.4);
+    text-align:center;
+    padding:20px;
+  }
+  /* Placeholder art: swap these two layers for real <img> tags when ready */
+  .layer.blockout{
+    background:
+      repeating-linear-gradient(135deg, #cfd2c8 0px, #cfd2c8 2px, #dadcd3 2px, #dadcd3 4px),
+      linear-gradient(180deg, #d7d9cf 0%, #b9bdae 60%, #9ca390 100%);
+    filter:grayscale(1) contrast(1.05);
+  }
+  .layer.painted{
+    background:
+      radial-gradient(120% 90% at 20% 15%, #f4e9c8 0%, transparent 55%),
+      linear-gradient(180deg, #e7ecd8 0%, #b9c99a 38%, #7f9a63 62%, #4f6b45 100%);
+    clip-path:inset(0 50% 0 0);
+  }
+  .compare .caption{
+    position:absolute;
+    bottom:14px;
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    background:rgba(241,242,237,0.88);
+    padding:5px 10px;
+    color:var(--ink);
+  }
+  .compare .caption.left{ left:14px; }
+  .compare .caption.right{ right:14px; }
+  .handle{
+    position:absolute;
+    top:0; bottom:0;
+    left:50%;
+    width:2px;
+    background:var(--ochre);
+    transform:translateX(-1px);
+  }
+  .handle::after{
+    content:"⟷";
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:34px; height:34px;
+    background:var(--ochre);
+    color:var(--paper);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:14px;
+  }
+  .compare-hint{
+    margin-top:14px;
+    font-size:12.5px;
+    color:rgba(34,36,29,0.5);
+  }
+
+  /* ---------- Process notes ---------- */
+  .steps{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+    gap:28px;
+    margin-top:36px;
+  }
+  .step .step-label{
+    font-family:'Newsreader', serif;
+    font-style:italic;
+    color:var(--ochre);
+    font-size:14px;
+    margin-bottom:8px;
+  }
+  .step h3{
+    font-size:17px;
+    margin-bottom:8px;
+    font-weight:500;
+  }
+  .step p{
+    font-size:14px;
+    color:rgba(34,36,29,0.7);
+  }
+
+  /* ---------- Gallery placeholders ---------- */
+  .gallery{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:14px;
+    margin-top:32px;
+  }
+  .gallery .tile{
+    aspect-ratio:4/5;
+    background:var(--paper);
+    border:1px dashed var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:11.5px;
+    text-align:center;
+    padding:12px;
+    color:rgba(34,36,29,0.45);
+    letter-spacing:0.02em;
+  }
+  @media (max-width:640px){
+    .gallery{grid-template-columns:1fr 1fr;}
+  }
+
+  /* ---------- Footer / contact ---------- */
+  footer{
+    padding:56px 0 72px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:20px;
+  }
+  footer .contact-links{
+    display:flex;
+    gap:22px;
+    font-size:14px;
+  }
+  footer .contact-links a{
+    text-decoration:none;
+    border-bottom:1px solid var(--ochre);
+    padding-bottom:1px;
+  }
+  footer .name{
+    font-family:'Newsreader', serif;
+    font-style:italic;
+    font-size:14px;
+    color:rgba(34,36,29,0.55);
+  }
+
+  @media (prefers-reduced-motion:no-preference){
+    .fade-in{
+      animation:fadeUp 0.7s ease both;
+    }
+    @keyframes fadeUp{
+      from{opacity:0; transform:translateY(14px);}
+      to{opacity:1; transform:translateY(0);}
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Portfolio · Ilustración &amp; Animación</div>
+    <h1>Del <em>blockout</em><br>al paisaje pintado.</h1>
+    <p class="subtitle">Estudiante de animación e ilustración. Trabajo entre el 3D y la pintura digital, construyendo escenarios desde el volumen hasta el color.</p>
+    <nav>
+      <a href="#proyecto">Proyecto destacado</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#galeria">Galería</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <section id="proyecto">
+    <div class="project-head">
+      <div>
+        <div class="section-label">Proyecto destacado</div>
+        <h2 class="section-title">Aldea de techos de paja</h2>
+      </div>
+      <dl class="project-meta">
+        <div>
+          <dt>Técnica</dt>
+          <dd>3D + pintura digital</dd>
+        </div>
+        <div>
+          <dt>Software</dt>
+          <dd>Maya · Photoshop</dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="compare" id="compareSlider">
+      <div class="layer blockout">
+        <span>Bloqueo 3D en gris — sustituir por captura real</span>
+      </div>
+      <div class="layer painted" id="paintedLayer">
+        <span>Ilustración pintada final — sustituir por imagen real</span>
+      </div>
+      <div class="handle" id="handle"></div>
+      <div class="caption left">Blockout</div>
+      <div class="caption right">Pintado final</div>
+    </div>
+    <p class="compare-hint">Arrastra para comparar el volumen 3D de referencia con la ilustración pintada encima.</p>
+  </section>
+
+  <section id="proceso">
+    <div class="section-label">Proceso</div>
+    <h2 class="section-title">De la maqueta gris a la atmósfera final</h2>
+    <p class="section-body">El escenario parte de un bloqueo 3D en escala de grises que fija la perspectiva, la escala y la luz. Sobre esa base se pinta directamente, capa a capa, hasta llegar al color y la atmósfera definitivos.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-label">01</div>
+        <h3>Bloqueo 3D</h3>
+        <p>Volúmenes simples en gris: cabañas, colinas y río, con la perspectiva y la luz ya decididas.</p>
+      </div>
+      <div class="step">
+        <div class="step-label">02</div>
+        <h3>Estudio de valores</h3>
+        <p>Pintado de luces y sombras sobre el render, sin color, para fijar el ambiente.</p>
+      </div>
+      <div class="step">
+        <div class="step-label">03</div>
+        <h3>Color y textura</h3>
+        <p>Paleta final y textura pictórica: techos de paja, vegetación y reflejos del río.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="galeria">
+    <div class="section-label">Galería</div>
+    <h2 class="section-title">Más imágenes del proyecto</h2>
+    <div class="gallery">
+      <div class="tile">Boceto de composición<br>— añadir imagen</div>
+      <div class="tile">Detalle: cabaña principal<br>— añadir imagen</div>
+      <div class="tile">Detalle: río y reflejos<br>— añadir imagen</div>
+      <div class="tile">Paleta de color<br>— añadir imagen</div>
+      <div class="tile">Vista nocturna / variante<br>— añadir imagen</div>
+      <div class="tile">Blockout sin pintar<br>— añadir imagen</div>
+    </div>
+  </section>
+
+  <footer id="contacto">
+    <div class="name">Ilustración &amp; animación — portfolio de estudiante</div>
+    <div class="contact-links">
+      <a href="#">Instagram</a>
+      <a href="#">Correo</a>
+      <a href="#">CV / PDF</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+  const slider = document.getElementById('compareSlider');
+  const painted = document.getElementById('paintedLayer');
+  const handle = document.getElementById('handle');
+  let dragging = false;
+
+  function setPosition(clientX){
+    const rect = slider.getBoundingClientRect();
+    let pct = ((clientX - rect.left) / rect.width) * 100;
+    pct = Math.max(0, Math.min(100, pct));
+    painted.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+    handle.style.left = pct + '%';
+  }
+
+  slider.addEventListener('pointerdown', (e) => {
+    dragging = true;
+    setPosition(e.clientX);
+  });
+  window.addEventListener('pointermove', (e) => {
+    if(dragging) setPosition(e.clientX);
+  });
+  window.addEventListener('pointerup', () => dragging = false);
+  slider.addEventListener('touchstart', (e) => setPosition(e.touches[0].clientX), {passive:true});
+  slider.addEventListener('touchmove', (e) => setPosition(e.touches[0].clientX), {passive:true});
+</script>
+
+</body>
+</html>

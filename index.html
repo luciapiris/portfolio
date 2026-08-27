@@ -4,9 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portfolio — Ilustración & Animación</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
     --stone: #E7E9E2;
@@ -15,20 +12,21 @@
     --ochre: #B8912B;
     --paper: #F1F2ED;
     --line: rgba(34,36,29,0.14);
+    --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
   body{
     background:var(--stone);
     color:var(--ink);
-    font-family:'Work Sans', sans-serif;
+    font-family:var(--sans);
     font-weight:400;
     line-height:1.5;
     -webkit-font-smoothing:antialiased;
   }
   h1,h2,h3, .display{
-    font-family:'Newsreader', serif;
-    font-weight:500;
+    font-family:var(--sans);
+    font-weight:700;
     letter-spacing:-0.01em;
   }
   a{color:inherit;}
@@ -112,6 +110,13 @@
     max-width:20ch;
     margin-bottom:20px;
   }
+  .subsection-label{
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--forest);
+    margin:8px 0 16px;
+  }
   .section-body{
     max-width:58ch;
     color:rgba(34,36,29,0.78);
@@ -140,7 +145,7 @@
     margin-bottom:4px;
   }
   .project-meta dd{
-    font-family:'Newsreader', serif;
+    font-family:var(--sans);
     font-size:15px;
     color:var(--ink);
   }
@@ -161,25 +166,31 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    font-family:'Newsreader', serif;
+    font-family:var(--sans);
     font-style:italic;
     font-size:15px;
     color:rgba(34,36,29,0.4);
     text-align:center;
     padding:20px;
   }
-  /* Placeholder art: swap these two layers for real <img> tags when ready */
+  /* Placeholder art: swap the remaining layer for a real <img> tag when ready */
   .layer.blockout{
-    background:
-      repeating-linear-gradient(135deg, #cfd2c8 0px, #cfd2c8 2px, #dadcd3 2px, #dadcd3 4px),
-      linear-gradient(180deg, #d7d9cf 0%, #b9bdae 60%, #9ca390 100%);
+    padding:0;
+    clip-path:inset(0 50% 0 0);
+  }
+  .layer.blockout img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
     filter:grayscale(1) contrast(1.05);
   }
   .layer.painted{
-    background:
-      radial-gradient(120% 90% at 20% 15%, #f4e9c8 0%, transparent 55%),
-      linear-gradient(180deg, #e7ecd8 0%, #b9c99a 38%, #7f9a63 62%, #4f6b45 100%);
-    clip-path:inset(0 50% 0 0);
+    padding:0;
+  }
+  .layer.painted img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
   }
   .compare .caption{
     position:absolute;
@@ -230,7 +241,7 @@
     margin-top:36px;
   }
   .step .step-label{
-    font-family:'Newsreader', serif;
+    font-family:var(--sans);
     font-style:italic;
     color:var(--ochre);
     font-size:14px;
@@ -290,7 +301,7 @@
     padding-bottom:1px;
   }
   footer .name{
-    font-family:'Newsreader', serif;
+    font-family:var(--sans);
     font-style:italic;
     font-size:14px;
     color:rgba(34,36,29,0.55);
@@ -312,11 +323,11 @@
 <div class="wrap">
   <header>
     <div class="eyebrow">Portfolio · Ilustración &amp; Animación</div>
-    <h1>Del <em>blockout</em><br>al paisaje pintado.</h1>
+    <h1>Lucia Piris. <em>Concept Art</em></h1>
     <p class="subtitle">Estudiante de animación e ilustración. Trabajo entre el 3D y la pintura digital, construyendo escenarios desde el volumen hasta el color.</p>
     <nav>
       <a href="#proyecto">Proyecto destacado</a>
-      <a href="#proceso">Proceso</a>
+      <a href="#proceso">Exploración</a>
       <a href="#galeria">Galería</a>
       <a href="#contacto">Contacto</a>
     </nav>
@@ -326,7 +337,7 @@
     <div class="project-head">
       <div>
         <div class="section-label">Proyecto destacado</div>
-        <h2 class="section-title">Aldea de techos de paja</h2>
+        <h2 class="section-title">Saving Nekoria</h2>
       </div>
       <dl class="project-meta">
         <div>
@@ -340,12 +351,13 @@
       </dl>
     </div>
 
+    <div class="subsection-label">Environment</div>
     <div class="compare" id="compareSlider">
-      <div class="layer blockout">
-        <span>Bloqueo 3D en gris — sustituir por captura real</span>
+      <div class="layer painted">
+        <img src="images/newenvironment.png" alt="Ilustración pintada final">
       </div>
-      <div class="layer painted" id="paintedLayer">
-        <span>Ilustración pintada final — sustituir por imagen real</span>
+      <div class="layer blockout" id="blockoutLayer">
+        <img src="images/newenvironmentblockout.png" alt="Bloqueo 3D en gris">
       </div>
       <div class="handle" id="handle"></div>
       <div class="caption left">Blockout</div>
@@ -355,7 +367,7 @@
   </section>
 
   <section id="proceso">
-    <div class="section-label">Proceso</div>
+    <div class="section-label">Exploración</div>
     <h2 class="section-title">De la maqueta gris a la atmósfera final</h2>
     <p class="section-body">El escenario parte de un bloqueo 3D en escala de grises que fija la perspectiva, la escala y la luz. Sobre esa base se pinta directamente, capa a capa, hasta llegar al color y la atmósfera definitivos.</p>
     <div class="steps">
@@ -402,7 +414,7 @@
 
 <script>
   const slider = document.getElementById('compareSlider');
-  const painted = document.getElementById('paintedLayer');
+  const blockout = document.getElementById('blockoutLayer');
   const handle = document.getElementById('handle');
   let dragging = false;
 
@@ -410,7 +422,7 @@
     const rect = slider.getBoundingClientRect();
     let pct = ((clientX - rect.left) / rect.width) * 100;
     pct = Math.max(0, Math.min(100, pct));
-    painted.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+    blockout.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
     handle.style.left = pct + '%';
   }
 

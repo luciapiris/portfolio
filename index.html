@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portfolio — Ilustración & Animación</title>
 <style>
+  @font-face{
+    font-family:"Saving Nekoria";
+    src:url('fonts/Savingnekoria-Regular.ttf') format('truetype');
+    font-weight:400;
+    font-style:normal;
+    font-display:swap;
+  }
   :root{
     --stone: #1B1E22;
     --ink: #E7EAEE;
@@ -40,8 +47,9 @@
 
   /* ---------- Header ---------- */
   header{
-    padding:64px 0 40px;
-    border-bottom:1px solid var(--line);
+    padding:12px 0 8px;
+    display:flex;
+    justify-content:flex-end;
   }
   .eyebrow{
     font-size:12.5px;
@@ -71,15 +79,15 @@
   }
   .subtitle{
     margin-top:20px;
-    max-width:46ch;
+    max-width:none;
     font-size:16.5px;
     color:rgba(231,234,238,0.72);
   }
   nav{
-    margin-top:36px;
     display:flex;
-    gap:28px;
-    font-size:13.5px;
+    gap:18px;
+    font-family:"Saving Nekoria", var(--sans);
+    font-size:14px;
     letter-spacing:0.03em;
   }
   nav a{
@@ -88,14 +96,27 @@
     opacity:0.6;
     transition:opacity 0.2s;
     padding-bottom:2px;
-    border-bottom:1px solid transparent;
   }
-  nav a:hover{ opacity:1; border-bottom-color:var(--ochre); }
+  nav a:hover{ opacity:1; }
+  nav a .letter{
+    display:inline-block;
+    transition:transform 0.3s ease, color 0.3s ease;
+  }
+  nav a .letter.space{
+    width:0.32em;
+  }
+  nav a:hover .letter{
+    transform:translateY(-4px);
+    color:var(--ochre);
+  }
 
   /* ---------- Section generic ---------- */
   section{
     padding:72px 0;
     border-bottom:1px solid var(--line);
+  }
+  #proyecto{
+    padding-top:0;
   }
   section:last-of-type{border-bottom:none;}
   .section-label{
@@ -279,6 +300,18 @@
     object-fit:fill;
     pointer-events:none;
   }
+  .pattern-divider{
+    width:calc(100% + 56px);
+    margin-left:-28px;
+    margin-top:16px;
+    margin-bottom:16px;
+    height:30px;
+    background-image:url('images/pattern.png');
+    background-repeat:round no-repeat;
+    background-position:left center;
+    background-size:auto 30px;
+    opacity:0.5;
+  }
   .artbook-seamless{
     width:calc(100% + 56px);
     margin-left:-28px;
@@ -402,105 +435,24 @@
 </head>
 <body>
 
-<div class="wrap">
+<div class="wrap" id="inicio">
   <header>
-    <div class="eyebrow">Portfolio · Ilustración &amp; Animación</div>
-    <h1>Lucia Piris. <em>Concept Art</em></h1>
-    <p class="subtitle">Estudiante de animación e ilustración. Trabajo entre el 3D y la pintura digital, construyendo escenarios desde el volumen hasta el color.</p>
     <nav>
-      <a href="#proyecto">Proyecto destacado</a>
+      <a href="#inicio">Proyecto destacado</a>
       <a href="#galeria">Galería</a>
       <a href="#contacto">Contacto</a>
     </nav>
   </header>
 
-  <section id="proyecto">
-    <div class="project-head">
-      <div>
-        <div class="section-label">Proyecto destacado</div>
-        <h2 class="section-title">Saving Nekoria</h2>
-      </div>
-      <dl class="project-meta">
-        <div>
-          <dt>Técnica</dt>
-          <dd>3D + pintura digital</dd>
-        </div>
-        <div>
-          <dt>Software</dt>
-          <dd>Blender · Photoshop</dd>
-        </div>
-      </dl>
-    </div>
+  <div class="pattern-divider"></div>
 
+  <section id="proyecto">
     <div class="artbook">
       <div class="artbook-hero">
         <img src="images/newenvironmenttitle.png" alt="Saving Nekoria">
       </div>
     </div>
 
-    <div class="artbook-seamless">
-      <img src="images/propexploration.png" alt="Exploración de siluetas y diseño de la cabaña principal">
-    </div>
-
-    <div class="artbook-seamless">
-      <img src="images/propexploration2.png" alt="Exploración de la caravana y su interior">
-    </div>
-
-    <div class="subsection-label" style="margin-top:56px;">Environment</div>
-    <div class="compare" id="compareSlider">
-      <div class="layer painted">
-        <img src="images/newenvironment.png" alt="Ilustración pintada final">
-      </div>
-      <div class="layer blockout" id="blockoutLayer">
-        <img src="images/newenvironmentblockout.png" alt="Bloqueo 3D en gris">
-      </div>
-      <div class="handle" id="handle"></div>
-      <div class="caption left">Blockout</div>
-      <div class="caption right">Pintado final</div>
-    </div>
-    <p class="compare-hint">Arrastra para comparar el volumen 3D de referencia con la ilustración pintada encima.</p>
-
-    <div id="proceso" class="subsection-label" style="margin-top:56px;">Exploración</div>
-    <h3 class="section-title">De la maqueta gris a la atmósfera final</h3>
-    <p class="section-body">El escenario parte de un bloqueo 3D en escala de grises que fija la perspectiva, la escala y la luz. Sobre esa base se pinta directamente, capa a capa, hasta llegar al color y la atmósfera definitivos.</p>
-    <div class="steps">
-      <div class="step">
-        <div class="step-label">01</div>
-        <h3>Bloqueo 3D</h3>
-        <p>Volúmenes simples en gris: cabañas, colinas y río, con la perspectiva y la luz ya decididas.</p>
-      </div>
-      <div class="step">
-        <div class="step-label">02</div>
-        <h3>Estudio de valores</h3>
-        <p>Pintado de luces y sombras sobre el render, sin color, para fijar el ambiente.</p>
-      </div>
-      <div class="step">
-        <div class="step-label">03</div>
-        <h3>Color y textura</h3>
-        <p>Paleta final y textura pictórica: techos de paja, vegetación y reflejos del río.</p>
-      </div>
-    </div>
-
-    <div class="subsection-label" style="margin-top:56px;">Desglose visual</div>
-    <div class="artbook">
-      <div class="artbook-panel">
-        <div class="artbook-item">
-          <div class="artbook-icon"></div>
-          <h4>Elemento 01</h4>
-          <p>Nombre y descripción — sustituir por imagen de prop real.</p>
-        </div>
-        <div class="artbook-item">
-          <div class="artbook-icon"></div>
-          <h4>Elemento 02</h4>
-          <p>Nombre y descripción — sustituir por imagen de prop real.</p>
-        </div>
-        <div class="artbook-item">
-          <div class="artbook-icon"></div>
-          <h4>Elemento 03</h4>
-          <p>Nombre y descripción — sustituir por imagen de prop real.</p>
-        </div>
-      </div>
-    </div>
   </section>
 
   <section id="galeria">
@@ -527,29 +479,19 @@
 </div>
 
 <script>
-  const slider = document.getElementById('compareSlider');
-  const blockout = document.getElementById('blockoutLayer');
-  const handle = document.getElementById('handle');
-  let dragging = false;
-
-  function setPosition(clientX){
-    const rect = slider.getBoundingClientRect();
-    let pct = ((clientX - rect.left) / rect.width) * 100;
-    pct = Math.max(0, Math.min(100, pct));
-    blockout.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
-    handle.style.left = pct + '%';
-  }
-
-  slider.addEventListener('pointerdown', (e) => {
-    dragging = true;
-    setPosition(e.clientX);
+  document.querySelectorAll('nav a').forEach((link) => {
+    const text = link.textContent;
+    link.setAttribute('aria-label', text);
+    link.textContent = '';
+    [...text].forEach((ch, i) => {
+      const isSpace = ch === String.fromCharCode(32);
+      const span = document.createElement('span');
+      span.className = isSpace ? 'letter space' : 'letter';
+      span.style.transitionDelay = `${i * 25}ms`;
+      span.textContent = isSpace ? String.fromCharCode(160) : ch;
+      link.appendChild(span);
+    });
   });
-  window.addEventListener('pointermove', (e) => {
-    if(dragging) setPosition(e.clientX);
-  });
-  window.addEventListener('pointerup', () => dragging = false);
-  slider.addEventListener('touchstart', (e) => setPosition(e.touches[0].clientX), {passive:true});
-  slider.addEventListener('touchmove', (e) => setPosition(e.touches[0].clientX), {passive:true});
 </script>
 
 </body>
